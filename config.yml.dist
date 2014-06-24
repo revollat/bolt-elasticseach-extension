@@ -1,0 +1,48 @@
+client_params:
+    hosts:
+        - localhost:9200
+
+indexname: 'mywebsite'
+
+indexsetting:
+    analysis:
+        analyzer:
+            default_index:
+                type: custom
+                char_filter: html_strip
+                tokenizer: standard
+                filter: [ trim, lowercase, stop_fr, fr_stemmer, my_edge_ngram_filter, asciifolding ]
+            default_search:
+                type: custom
+                tokenizer: standard
+                filter: [ trim, lowercase, stop_fr, fr_stemmer, asciifolding ]
+        filter:
+            stop_fr:
+                type: "stop"
+                stopwords: [ _french_ ]
+            my_edge_ngram_filter:
+                type: "edgeNGram"
+                min_gram: "3"
+                max_gram: "20"
+            fr_stemmer:
+                type: "stemmer"
+                name: "french"
+
+content_types: [entries, pages]
+
+entries:
+    title:
+        mapping:
+            type: string
+            boost: 10
+    body:
+        mapping:
+            type: string
+
+pages:
+    title:
+        mapping:
+            type: string
+    body:
+        mapping:
+            type: string
