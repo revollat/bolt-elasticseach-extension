@@ -1,4 +1,4 @@
 bolt-elasticseach-extension
 ===========================
 
-Elastic search intégration in Bolt
+Elastic search integration in Bolt
